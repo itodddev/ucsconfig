@@ -1,7 +1,6 @@
 <template>
     <div>
-        <rack-item @rackRows="updateRows" row="0"></rack-item>
-        <rack-item @rackRows="updateRows" row="1"></rack-item>
+        <rack-item v-for="(row, index) in rackObj.rows" @rackRows="updateRows" :row="index" :key="index"></rack-item>
     </div>
 </template>
 

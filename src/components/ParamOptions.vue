@@ -196,13 +196,15 @@ export default {
       }
     };
   },
-  methods: mapActions(["setParameters", "getImage"]),
+  methods: mapActions(["setParameters", "getImage", "setRacks"]),
   created() {
     this.setParameters(this.paramsObj);
+    this.setRacks();
     this.getImage();
   },
   updated() {
     this.setParameters(this.paramsObj);
+    this.setRacks();
     this.getImage();
   }
 };
