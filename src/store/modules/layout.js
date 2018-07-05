@@ -21,8 +21,6 @@ const actions = {
         commit('setParams', parameterString);
     },
     async getImage() {
-        
-        console.log(state.parameters);
         const response = await api.getImage(state.parameters);
         return response;
     }

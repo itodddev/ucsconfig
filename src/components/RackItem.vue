@@ -2,7 +2,7 @@
     
 <div class="field is-horizontal">
     <div class="field-label">
-        <select v-model="equipmentSelect">
+        <select v-model="rackItemObj.equipmentSelect">
             <option value="000">--select--</option>
             <option value="SPACE1">Space 1 RU</option>
             <option value="SPACE2">Space 2 RU</option>
@@ -71,34 +71,34 @@
         <div class="field is-narrow">
             <div class="control has-text-centered">
                 <label class="radio">
-                    <input type="radio" :name="row" value="0" v-model="equipmentQuantity" /><span class="choicePadding">0</span>
+                    <input type="radio" :name="row" value="0" v-model="rackItemObj.equipmentQuantity" /><span class="choicePadding">0</span>
                 </label>
                 <label class="radio">
-                    <input type="radio" :name="row" value="1" v-model="equipmentQuantity" /><span class="choicePadding">1</span>
+                    <input type="radio" :name="row" value="1" v-model="rackItemObj.equipmentQuantity" /><span class="choicePadding">1</span>
                 </label>
                 <label class="radio">
-                    <input type="radio" :name="row" value="2" v-model="equipmentQuantity" /><span class="choicePadding">2</span>
+                    <input type="radio" :name="row" value="2" v-model="rackItemObj.equipmentQuantity" /><span class="choicePadding">2</span>
                 </label>
                 <label class="radio">
-                    <input type="radio" :name="row" value="3" v-model="equipmentQuantity" /><span class="choicePadding">3</span>
+                    <input type="radio" :name="row" value="3" v-model="rackItemObj.equipmentQuantity" /><span class="choicePadding">3</span>
                 </label>
                 <label class="radio">
-                    <input type="radio" :name="row" value="4" v-model="equipmentQuantity" /><span class="choicePadding">4</span>
+                    <input type="radio" :name="row" value="4" v-model="rackItemObj.equipmentQuantity" /><span class="choicePadding">4</span>
                 </label>
                 <label class="radio">
-                    <input type="radio" :name="row" value="6" v-model="equipmentQuantity" /><span class="choicePadding">6</span>
+                    <input type="radio" :name="row" value="6" v-model="rackItemObj.equipmentQuantity" /><span class="choicePadding">6</span>
                 </label>
                 <label class="radio">
-                    <input type="radio" :name="row" value="8" v-model="equipmentQuantity" /><span class="choicePadding">8</span>
+                    <input type="radio" :name="row" value="8" v-model="rackItemObj.equipmentQuantity" /><span class="choicePadding">8</span>
                 </label>
                 <label class="radio">
-                    <input type="radio" :name="row" value="12" v-model="equipmentQuantity" /><span class="choicePadding">12</span>
+                    <input type="radio" :name="row" value="12" v-model="rackItemObj.equipmentQuantity" /><span class="choicePadding">12</span>
                 </label>
                 <label class="radio">
-                    <input type="radio" :name="row" value="16" v-model="equipmentQuantity" /><span class="choicePadding">16</span>
+                    <input type="radio" :name="row" value="16" v-model="rackItemObj.equipmentQuantity" /><span class="choicePadding">16</span>
                 </label>
                 <span class="checkBoxPadding">
-                    <input type="checkbox" id="reverse" v-model="reverse">
+                    <input type="checkbox" id="rev" v-model="rackItemObj.rev">
                     <span class="labelPadding"><label for="checkbox">reverse</label></span>
                 </span>
             </div>
@@ -114,10 +114,15 @@ export default {
   props: ["row"],
   data() {
     return {
-      equipmentSelect: "",
-      equipmentQuantity: 0,
-      reverse: false
+      rackItemObj: {
+        equipmentSelect: "000",
+        equipmentQuantity: 0,
+        rev: false
+      }
     };
+  },
+  updated() {
+    this.$emit("rackRows", this.row, this.rackItemObj);
   }
 };
 </script>

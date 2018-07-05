@@ -1,20 +1,20 @@
 <template>
     <div>
-        <rack-item row="1"></rack-item>
-        <rack-item row="2"></rack-item>
+        <rack num="1"></rack>
+        <br>
         <param-options></param-options>
     </div>
 </template>
 
 <script>
-import RackItem from "./components/RackItem";
+import Rack from "./components/Rack";
 import ParamOptions from "./components/ParamOptions";
 
 export default {
     name: "App",
     components: {
-        ParamOptions,
-        RackItem
+        Rack,
+        ParamOptions
     },
 }
 </script>
