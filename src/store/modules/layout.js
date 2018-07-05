@@ -1,4 +1,5 @@
 import api from "../../api/ucs4";
+import NProgress from "nprogress";
 
 const state = {
     parameters: ""
@@ -21,7 +22,9 @@ const actions = {
         commit('setParams', parameterString);
     },
     async getImage() {
+        NProgress.start();
         const response = await api.getImage(state.parameters);
+        NProgress.done();
         return response;
     }
 };

@@ -15,7 +15,7 @@ export default {
         return {
             rackObj: {
                 id: this.num,
-                rows: []
+                rows: Array(15)
             }
         }
     },
@@ -24,7 +24,6 @@ export default {
     },
     methods: {
         updateRows: function(rowNum, rowItem) {
-            console.log(rowItem);
             this.rackObj.rows[rowNum] = rowItem;
         }
     },

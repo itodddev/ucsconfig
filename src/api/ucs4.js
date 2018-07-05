@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const ROOT_URL = "http://ucs4.us/ucs/engine/ucs-engine.cgi";
-const TEST_URL = "http://localhost:3000/xml";
+const TEST_URL = "http://192.168.1.146:3000/xml";
 
 export default {
     getImage(params) {
