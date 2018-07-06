@@ -200,12 +200,12 @@ export default {
   created() {
     this.setParameters(this.paramsObj);
     this.setRacks();
-    this.getImage();
+    //this.getImage();
   },
   updated() {
     this.setParameters(this.paramsObj);
     this.setRacks();
-    this.getImage();
+    //this.getImage();
   }
 };
 </script>

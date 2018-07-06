@@ -2,17 +2,46 @@ import api from "../../api/ucs4";
 import NProgress from "nprogress";
 
 const state = {
-    racks:[],
+    racks: "",
     parameters: "",
     temp_xml: ""
 };
 
 const getters = {
-    getParameters: state => state.parameters
+    getParameters: state => state.parameters,
+    getRacks: state => state.racks
 };
 
 const actions = {
-    setRacks({ commit }){
+    setRack({ commit }, rackObj){
+        const RACK_HEADER = `<rack cfg="${rackObj.id}" src="UCS" seq="" res="LOW">`;
+        
+        var rackNum = rackObj.id;
+        var origRows = rackObj.rows;
+        
+        console.log(rackNum);
+        console.log(origRows);
+
+        function compressRows(rows) {
+            var temp = new Array();
+            console.log(rows);
+            for (var i = 0; i < rows.length; i++) {
+                if (rows[i]) {
+                    temp.push(rows[i])
+                }
+            }
+            return temp;
+        }
+
+        var compressed = compressRows(origRows);
+
+        // console.log(compressed);
+
+        commit("setRacks", origRows);
+    },
+    setRacks({
+        commit
+    }) {
         const HEADER = `<?xml version="1.0" encoding="UTF-8"?>
                         <layout mode="MANUAL" src="UCS" seq="" res="LOW">`;
         const FOOTER = `</layout>`;
@@ -25,7 +54,7 @@ const actions = {
                             <device model="NX1010" qty="6" />
                             <device model="MDS9124" qty="3" />
                            </rack>`;
-        const xmlString =  HEADER + RACK_TEMP + state.parameters + FOOTER;
+        const xmlString = HEADER + RACK_TEMP + state.parameters + FOOTER;
 
         commit("setXML", xmlString);
 
@@ -52,7 +81,8 @@ const actions = {
 
 const mutations = {
     setParams: (state, params) => state.parameters = params,
-    setXML: (state, params) => state.temp_xml = params
+    setXML: (state, params) => state.temp_xml = params,
+    setRacks: (state, params) => state.racks = params,
 };
 
 export default {

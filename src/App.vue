@@ -1,6 +1,6 @@
 <template>
     <div>
-        <rack num="1"></rack>
+        <router-view></router-view>
         <br>
         <param-options></param-options>
     </div>
