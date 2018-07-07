@@ -1,30 +1,26 @@
 import api from "../../api/ucs4";
 import NProgress from "nprogress";
+import Vue from "vue";
 
 const state = {
-    racks: "",
+    racks: {},
     parameters: "",
     temp_xml: ""
 };
 
 const getters = {
     getParameters: state => state.parameters,
-    getRacks: state => state.racks
+    getRack: state => state.racks,
 };
 
 const actions = {
     setRack({ commit }, rackObj){
         const RACK_HEADER = `<rack cfg="${rackObj.id}" src="UCS" seq="" res="LOW">`;
         
-        var rackNum = rackObj.id;
-        var origRows = rackObj.rows;
         
-        console.log(rackNum);
-        console.log(origRows);
-
+        /*
         function compressRows(rows) {
             var temp = new Array();
-            console.log(rows);
             for (var i = 0; i < rows.length; i++) {
                 if (rows[i]) {
                     temp.push(rows[i])
@@ -37,7 +33,9 @@ const actions = {
 
         // console.log(compressed);
 
-        commit("setRacks", origRows);
+        var rack = { num: rackNum, items: origRows};
+        */
+        commit("setRacks", rackObj);
     },
     setRacks({
         commit
@@ -82,7 +80,7 @@ const actions = {
 const mutations = {
     setParams: (state, params) => state.parameters = params,
     setXML: (state, params) => state.temp_xml = params,
-    setRacks: (state, params) => state.racks = params,
+    setRacks: (state, obj) =>  state.racks = obj,
 };
 
 export default {

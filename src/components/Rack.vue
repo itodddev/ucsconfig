@@ -1,7 +1,6 @@
 <template>
     <div>
         <h1>Rack {{ num }}</h1>
-        {{ getRacks }}
         <br/>
         <rack-item v-for="(row, index) in rackObj.rows" @rackRows="updateRows" :row="index" :key="index"></rack-item>
     </div>
@@ -29,15 +28,19 @@ export default {
     methods: {
         updateRows: function(rowNum, rowItem) {
             this.rackObj.rows[rowNum] = rowItem;
-        },
-        ...mapActions(["setRack"]),
+            this.$emit("rack", this.rackObj);
+        }
     },
-    computed: mapGetters(["getRacks"]), // Move to App
-    created() {
-        this.setRack(this.rackObj);
-     }, 
     updated() {
-        this.setRack(this.rackObj);
+        //var rack = { id: this.num, items: this.rackObj }
+        //console.log(rack);
+    },
+    watch: {
+        rackObj: function(newRackObj) {
+            console.log(newRackObj);
+            var rack = { id: this.num, items: this.rackObj }
+            console.log(rack);
+        }
     }
 }
 </script>
