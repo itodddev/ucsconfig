@@ -32,7 +32,7 @@ export default {
            console.log(rackNum);
            this.rack = rackObj;
            this.rackNum = rackNum;
-           this.setRack(rackObj);
+           this.setRack(rackObj, this.rackNum);
         },
     },
     computed: mapGetters(["getRack"]),

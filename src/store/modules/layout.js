@@ -3,7 +3,7 @@ import NProgress from "nprogress";
 import Vue from "vue";
 
 const state = {
-    racks: {},
+    racks: "",
     parameters: "",
     temp_xml: ""
 };
@@ -14,28 +14,17 @@ const getters = {
 };
 
 const actions = {
-    setRack({ commit }, rackObj){
-        const RACK_HEADER = `<rack cfg="${rackObj.id}" src="UCS" seq="" res="LOW">`;
+    setRack({
+        commit
+    }, rackObj) {
+
+        const rackString =
+            `${rackObj.id} ${rackObj.rows[0].equipmentSelect} ${rackObj.rows[1].equipmentSelect}`;
         
-        
-        /*
-        function compressRows(rows) {
-            var temp = new Array();
-            for (var i = 0; i < rows.length; i++) {
-                if (rows[i]) {
-                    temp.push(rows[i])
-                }
-            }
-            return temp;
-        }
+        commit('setRacks', rackString);
 
-        var compressed = compressRows(origRows);
+        //commit("setRacks", rackObj);
 
-        // console.log(compressed);
-
-        var rack = { num: rackNum, items: origRows};
-        */
-        commit("setRacks", rackObj);
     },
     setRacks({
         commit
@@ -80,7 +69,7 @@ const actions = {
 const mutations = {
     setParams: (state, params) => state.parameters = params,
     setXML: (state, params) => state.temp_xml = params,
-    setRacks: (state, obj) =>  state.racks = obj,
+    setRacks: (state, obj) => state.racks = obj,
 };
 
 export default {
