@@ -3,7 +3,7 @@ import NProgress from "nprogress";
 import Vue from "vue";
 
 const state = {
-    racks: "",
+    racks: [{ id: 0 }, { id: 1 }, {id: 2 }],
     parameters: "",
     temp_xml: ""
 };
@@ -18,10 +18,10 @@ const actions = {
         commit
     }, rackObj) {
 
-        const rackString =
-            `${rackObj.id} ${rackObj.rows[0].equipmentSelect} ${rackObj.rows[1].equipmentSelect}`;
+        // const rackString =
+        //    `${rackObj.id} ${rackObj.rows[0].equipmentSelect} ${rackObj.rows[1].equipmentSelect}`;
         
-        commit('setRacks', rackString);
+        commit('setRackData', rackObj);
 
         //commit("setRacks", rackObj);
 
@@ -70,6 +70,18 @@ const mutations = {
     setParams: (state, params) => state.parameters = params,
     setXML: (state, params) => state.temp_xml = params,
     setRacks: (state, obj) => state.racks = obj,
+    addRack(state, item) {
+        state.racks.push(Object.assign(item));
+    },
+    setRackData(state, rackObj) {
+        state.racks.forEach((rack, index) => {
+            // console.log(`${rack.id} = ${rackObj.id}  index = ${index}`);
+               
+            if(rack.id === parseInt(rackObj.id, 10)) {
+                Vue.set(state.racks, index, rackObj);
+            }
+        });
+    },
 };
 
 export default {

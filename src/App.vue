@@ -22,17 +22,16 @@ export default {
     data() {
         return{
           rack: {},
-          rackNum: null
+          rackNum: 0
         }
     },
     methods: {
         ...mapActions(["setRack"]),
-        updateRack(rackObj, rackNum) {
+        updateRack(rackObj) {
 
-           console.log(rackNum);
            this.rack = rackObj;
-           this.rackNum = rackNum;
-           this.setRack(rackObj, this.rackNum);
+           this.rackNum = rackObj.id;
+           this.setRack(this.rack);
         },
     },
     computed: mapGetters(["getRack"]),

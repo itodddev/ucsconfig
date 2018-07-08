@@ -2,14 +2,13 @@
     <div>
         <h1>Rack {{ num }}</h1>
         <br/>
-        <rack-item v-for="(row, index) in rackObj.rows" @rackRows="updateRows" :row="index" :key="index"></rack-item>
+        <RackRow v-for="(row, index) in rackObj.rows" @rackRows="updateRows" :row="index" :key="index"></RackRow>
     </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 
-import RackItem from "./RackItem";
+import RackRow from "./RackRow";
 
 export default {
     name: "Rack",
@@ -23,25 +22,23 @@ export default {
         }
     },
     components: {
-        RackItem
+        RackRow
     },
     methods: {
         updateRows: function(rowNum, rowItem) {
             this.rackObj.rows[rowNum] = rowItem;
-            this.$emit("rack", this.rackObj);
+            this.$emit("rack", this.rackObj, this.rackObj.id);
         }
     },
     updated() {
         //var rack = { id: this.num, items: this.rackObj }
         //console.log(rack);
+        this.$emit("rack", this.rackObj, this.rackObj.id);
     },
-    watch: {
-        rackObj: function(newRackObj) {
-            console.log(newRackObj);
-            var rack = { id: this.num, items: this.rackObj }
-            console.log(rack);
-        }
+    beforeUpdate() {
+        this.$emit("rack", this.rackObj, this.rackObj.id);
     }
+    
 }
 </script>
 
