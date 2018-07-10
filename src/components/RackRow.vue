@@ -122,7 +122,7 @@ export default {
     };
   },
   updated() {
-    this.$emit("rackRows", parseInt(this.row, 10), this.rackRowObj);
+    this.$emit("rackRows", this.row, this.rackRowObj);
   }
 };
 </script>

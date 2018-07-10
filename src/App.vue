@@ -3,13 +3,13 @@
         {{ getRack }}<br />
         <router-link to="/rack/1" :num="1"> <button>1</button></router-link><router-link to="/rack/2" :num="2"><button>2</button></router-link>
         <router-view @rack="updateRack"></router-view>
-        <br>
         <param-options></param-options>
     </div>
 </template>
 
 <script>
 import Rack from "./components/Rack";
+import RackRow from "./components/RackRow";
 import ParamOptions from "./components/ParamOptions";
 import { mapGetters, mapActions } from "vuex";
 
@@ -17,6 +17,7 @@ export default {
     name: "App",
     components: {
         Rack,
+        RackRow,
         ParamOptions
     },
     data() {
@@ -24,6 +25,9 @@ export default {
           rack: {},
           rackNum: 0
         }
+    },
+    updated() {
+        this.setRack(this.rack);
     },
     methods: {
         ...mapActions(["setRack"]),
@@ -34,7 +38,9 @@ export default {
            this.setRack(this.rack);
         },
     },
-    computed: mapGetters(["getRack"]),
+    computed: {
+        ...mapGetters(["getRack"]),
+    },
 }
 </script>
 

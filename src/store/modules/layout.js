@@ -75,8 +75,6 @@ const mutations = {
     },
     setRackData(state, rackObj) {
         state.racks.forEach((rack, index) => {
-            // console.log(`${rack.id} = ${rackObj.id}  index = ${index}`);
-               
             if(rack.id === parseInt(rackObj.id, 10)) {
                 Vue.set(state.racks, index, rackObj);
             }

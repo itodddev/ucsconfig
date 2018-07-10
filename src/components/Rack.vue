@@ -7,41 +7,38 @@
 </template>
 
 <script>
-
 import RackRow from "./RackRow";
+import Vue from "vue";
 
 export default {
-    name: "Rack",
-    props:["num"],
-    data() {
-        return {
-            rackObj: {
-                id: this.num,
-                rows: Array(15)
-            }
-        }
-    },
-    components: {
-        RackRow
-    },
-    methods: {
-        updateRows: function(rowNum, rowItem) {
-            this.rackObj.rows[rowNum] = rowItem;
-            this.$emit("rack", this.rackObj, this.rackObj.id);
-        }
-    },
-    updated() {
-        //var rack = { id: this.num, items: this.rackObj }
-        //console.log(rack);
-        this.$emit("rack", this.rackObj, this.rackObj.id);
-    },
-    beforeUpdate() {
-        this.$emit("rack", this.rackObj, this.rackObj.id);
+  name: "Rack",
+  props: ["num"],
+  data() {
+    return {
+      rackObj: {
+        id: this.num,
+        rows: Array(15)
+      }
+    };
+  },
+  components: {
+    RackRow
+  },
+  methods: {
+    updateRows: function(rowNum, rowItem) {
+      Vue.set(this.rackObj.rows, rowNum, rowItem);
+      // this.rackObj.rows[rowNum] = rowItem;
+      this.$emit("rack", this.rackObj, this.rackObj.id);
     }
-    
-}
+  },
+  updated() {
+    this.$emit("rack", this.rackObj, this.rackObj.id);
+  },
+  beforeUpdate() {
+    this.$emit("rack", this.rackObj, this.rackObj.id);
+  }
+};
 </script>
 
 <style scoped>
-
 </style>
