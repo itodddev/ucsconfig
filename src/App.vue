@@ -2,7 +2,7 @@
     <div>
         {{ getRack }}<br />
         <router-link to="/rack/1" :num="1"> <button>1</button></router-link><router-link to="/rack/2" :num="2"><button>2</button></router-link>
-        <router-view @rack="updateRack"></router-view>
+        <router-view @rack="updateRack" :key="$route.fullPath"></router-view>
         <param-options></param-options>
     </div>
 </template>
