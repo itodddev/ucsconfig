@@ -24,18 +24,13 @@ export default {
   components: {
     RackRow
   },
-  methods: {
-    updateRows: function(rowNum, rowItem) {
-      Vue.set(this.rackObj.rows, rowNum, rowItem);
-      // this.rackObj.rows[rowNum] = rowItem;
-      this.$emit("rack", this.rackObj, this.rackObj.id);
-    }
-  },
   updated() {
     this.$emit("rack", this.rackObj, this.rackObj.id);
   },
-  beforeUpdate() {
-    this.$emit("rack", this.rackObj, this.rackObj.id);
+  methods: {
+    updateRows: function(rowNum, rowItem) {
+      Vue.set(this.rackObj.rows, rowNum, rowItem);
+    }
   }
 };
 </script>

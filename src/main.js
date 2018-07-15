@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 export const router = new VueRouter({    // exports router so it can be access in other files
     mode: 'history',
     routes: [
-        { path: '/rack/:num', component: Rack, props: true }, 
+        { path: '/rack/:num', component: Rack, props: true }
     ]
 });
 

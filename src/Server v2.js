@@ -10,7 +10,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var xhr = new XMLHttpRequest();
@@ -26,7 +26,7 @@ xhr.open("POST", url, false);
 xhr.setRequestHeader("Content-Type", "text/xml");
 
 
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
     console.log(xml);
 });
 
@@ -39,7 +39,13 @@ app.get('/image', (req, res) => {
     res.download(path);
 });
 
-app.post('/xml', (req, res, next) => {
+app.post('/rack/10', (req, res) => {
+    var temp = req.body;
+    console.log("Temp: " + temp.rows[0].selectedEquipment);
+    res.send(req.body);
+});
+
+app.post('/xml', (req, res) => {
     res.end(JSON.stringify(req.body));
 
     // var conv1 = parser.toJson(req.body.data);
@@ -61,6 +67,8 @@ app.post('/xml', (req, res, next) => {
 
     var filename;
     const getResponseBack = (url, xml) => {
+
+        
         return axios.post(url, xml, {
             headers: {
                 'Content-Type': 'text/xml'
