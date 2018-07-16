@@ -39,6 +39,8 @@ export default {
 
       //var rackStorage = window.localStorage;
       //var rackObject = this.rack;
+      /*
+      
       console.log(
         "Rack Num: " + this.rackNum + " Rack: " + JSON.stringify(this.rack)
       );
@@ -53,19 +55,38 @@ export default {
 
       this.rack = rackObj;
       this.rackNum = rackObj.id;
-      this.setRack(this.rack);
+      this.setRack(this.rack);  */
     },
     postNow() {
       // var rack = JSON.stringify(this.rack);
      
       axios
-        .post("http://localhost:3000/rack/10", this.rack, {
+        .post("http://localhost:3000/rack/10", { rack: this.rack, num: this.rackNum }, {
           headers: {
             "Content-type": "application/json"
           }
         })
         //.then(r => console.log("r: ", JSON.stringify(r, null, 3)));
-        .then(r => console.log("r: ", r.data.rows));
+        .then(r => this.setRack(r.data))
+        .catch((error) => {
+        // Error
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            // console.log(error.response.data);
+            // console.log(error.response.status);
+            // console.log(error.response.headers);
+        } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+        }
+        console.log(error.config);
+      });
     }
   },
   computed: {

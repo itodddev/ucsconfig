@@ -10,7 +10,9 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var xhr = new XMLHttpRequest();
@@ -40,9 +42,25 @@ app.get('/image', (req, res) => {
 });
 
 app.post('/rack/10', (req, res) => {
-    var temp = req.body;
-    console.log("Temp: " + temp.rows[0].selectedEquipment);
-    res.send(req.body);
+    var temp = req.body.rack;
+    var rN = req.body.num;
+    console.log(temp);
+    if (Object.keys(temp).length !== 0) {
+        for (var index = 0; index < temp.rows.length; index++) {
+
+            if (temp.rows[index]) {
+                console.log('Rack: ' + rN + ' Row : ' + index + ' : ' + temp.rows[index].selectedEquipment + ' : ' + temp.rows[index].equipmentQuantity)
+            } else {
+                console.log(index + ' : N/A');
+            }
+            
+        }
+    } else {
+        console.log("No Racks");
+    }
+
+    // console.log("Temp: " + temp.rows[0].selectedEquipment);
+    res.send(req.body.rack);
 });
 
 app.post('/xml', (req, res) => {
@@ -68,7 +86,7 @@ app.post('/xml', (req, res) => {
     var filename;
     const getResponseBack = (url, xml) => {
 
-        
+
         return axios.post(url, xml, {
             headers: {
                 'Content-Type': 'text/xml'
